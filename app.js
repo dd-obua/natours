@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
     .json({ message: 'Hello from the server side', app: 'Natours' });
 });
 
+app.post('/', (req, res) => {
+  res.send('You can post to this end point');
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`App running on port ${port} ...`);
