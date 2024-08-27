@@ -12,17 +12,15 @@ const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
 const encoding = 'utf-8';
 const tours = JSON.parse(fileSystem.readFileSync(filePath, encoding));
 
-// Get all tours
-app.get('/api/v1/tours', (req, res) => {
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
     results: tours.length,
     data: { tours },
   });
-});
+};
 
-// Get a specific tour
-app.get('/api/v1/tours/:id', (req, res) => {
+const getTour = (req, res) => {
   const { id } = req.params;
 
   if (id > tours.length) {
@@ -38,12 +36,10 @@ app.get('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: { tour },
   });
-});
+};
 
-// Define tours route with post
-app.post('/api/v1/tours', (req, res) => {
+const createTour = (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
-  console.log(newId);
   const newTour = Object.assign({ id: newId }, req.body);
   tours.push(newTour);
   const data = JSON.stringify(tours);
@@ -54,10 +50,9 @@ app.post('/api/v1/tours', (req, res) => {
       data: { tour: newTour },
     });
   });
-});
+};
 
-// Define route for updating data
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
   const { id } = req.params;
 
   if (id > tours.length) {
@@ -71,10 +66,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: { tour: '<Updated tour here>' },
   });
-});
+};
 
-// Define route for deleting data
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
   const { id } = req.params;
 
   if (id > tours.length) {
@@ -88,7 +82,16 @@ app.delete('/api/v1/tours/:id', (req, res) => {
     status: 'success',
     data: null,
   });
-});
+};
+
+const rootUrl = '/api/v1';
+const resource = '/tours';
+const url = `${rootUrl}${resource}`;
+const parameter = 'id';
+const specificUrl = `${url}/:${parameter}`;
+
+app.route(url).get(getAllTours).post(createTour);
+app.route(specificUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
 // Start server
 app.listen(port, () => {
