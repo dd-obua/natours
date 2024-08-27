@@ -24,12 +24,12 @@ app.get('/api/v1/tours', (req, res) => {
 // Get a specific tour
 app.get('/api/v1/tours/:id', (req, res) => {
   const { id } = req.params;
-  
+
   if (id > tours.length) {
     return res.status(404).json({
       status: 'fail',
       message: 'Invalid id',
-    }); 
+    });
   }
 
   const tour = tours.find((tour) => tour.id === +id);
@@ -53,6 +53,23 @@ app.post('/api/v1/tours', (req, res) => {
       status: 'success',
       data: { tour: newTour },
     });
+  });
+});
+
+// Define route for updating data
+app.patch('/api/v1/tours/:id', (req, res) => {
+  const { id } = req.params;
+
+  if (id > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { tour: '<Updated tour here>' },
   });
 });
 
