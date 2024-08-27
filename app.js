@@ -73,6 +73,23 @@ app.patch('/api/v1/tours/:id', (req, res) => {
   });
 });
 
+// Define route for deleting data
+app.delete('/api/v1/tours/:id', (req, res) => {
+  const { id } = req.params;
+
+  if (id > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id',
+    });
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`App running on port ${port} ...`);
