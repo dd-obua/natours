@@ -12,12 +12,31 @@ const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
 const encoding = 'utf-8';
 const tours = JSON.parse(fileSystem.readFileSync(filePath, encoding));
 
-// Define tours route with get
+// Get all tours
 app.get('/api/v1/tours', (req, res) => {
   res.status(200).json({
     status: 'success',
     results: tours.length,
     data: { tours },
+  });
+});
+
+// Get a specific tour
+app.get('/api/v1/tours/:id', (req, res) => {
+  const { id } = req.params;
+  
+  if (id > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id',
+    }); 
+  }
+
+  const tour = tours.find((tour) => tour.id === +id);
+
+  res.status(200).json({
+    status: 'success',
+    data: { tour },
   });
 });
 
