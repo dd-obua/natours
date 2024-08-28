@@ -1,36 +1,27 @@
 // Users route handlers
-
-exports.getAllUsers = (req, res) => {
-  res.status(500).json({
+const routeError = (res) => {
+  return res.status(500).json({
     status: 'fail',
     message: 'This route is not yet defined',
   });
+};
+
+exports.getAllUsers = (req, res) => {
+  routeError(res);
 };
 
 exports.createUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    message: 'This route is not yet defined',
-  });
+  routeError(res);
 };
 
 exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    message: 'This route is not yet defined',
-  });
+  routeError(res);
 };
 
 exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    message: 'This route is not yet defined',
-  });
+  routeError(res);
 };
 
 exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'fail',
-    message: 'This route is not yet defined',
-  });
+  routeError(res);
 };
