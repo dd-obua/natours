@@ -3,7 +3,7 @@ const express = require('express');
 
 const app = express();
 
-// Middleware
+// Middleware - a body parser
 app.use(express.json());
 
 const port = 3000;
