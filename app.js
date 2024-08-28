@@ -144,14 +144,14 @@ const specificUrl = `${rootUrl}:${parameter}`;
 
 // Tours Routes
 const tourRouter = express.Router();
-app.use(toursUrl, tourRouter);
+app.use(toursUrl, tourRouter); // mounting a router on a route
 
 tourRouter.route(rootUrl).get(getAllTours).post(createTour);
 tourRouter.route(specificUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
 // Users Routes
 const userRouter = express.Router();
-app.use(usersUrl, userRouter);
+app.use(usersUrl, userRouter); // mounting a router on a route
 
 userRouter.route(rootUrl).get(getAllUsers).post(createUser);
 userRouter.route(specificUrl).get(getUser).patch(updateUser).delete(deleteUser);
