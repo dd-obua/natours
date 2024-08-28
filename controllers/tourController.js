@@ -5,7 +5,6 @@ const encoding = 'utf-8';
 const tours = JSON.parse(fs.readFileSync(filePath, encoding));
 
 // Tours route handlers
-
 exports.getAllTours = (req, res) => {
   console.log(req.requestTime);
 
