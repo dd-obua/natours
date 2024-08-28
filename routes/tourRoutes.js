@@ -1,13 +1,10 @@
 const express = require('express');
 
 const { rootUrl, specificUrl } = require('./routeUrls');
-const {
-  getAllTours,
-  getTour,
-  createTour,
-  updateTour,
-  deleteTour,
-} = require('../controllers/tourController');
+const tourController = require('../controllers/tourController');
+
+const { getAllTours, getTour, createTour, updateTour, deleteTour } =
+  tourController;
 
 const app = express();
 
