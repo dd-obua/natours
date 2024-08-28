@@ -1,10 +1,12 @@
-const fileSystem = require('fs');
+const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-// Middleware - a body parser
-app.use(express.json());
+// Middleware
+app.use(morgan('dev'));
+app.use(express.json()); // body parser
 
 app.use((req, res, next) => {
   console.log('Hello from the middleware 👋');
@@ -20,8 +22,9 @@ const port = 3000;
 
 const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
 const encoding = 'utf-8';
-const tours = JSON.parse(fileSystem.readFileSync(filePath, encoding));
+const tours = JSON.parse(fs.readFileSync(filePath, encoding));
 
+// Route handlers
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
 
@@ -103,6 +106,7 @@ const url = `${rootUrl}${resource}`;
 const parameter = 'id';
 const specificUrl = `${url}/:${parameter}`;
 
+// Routes
 app.route(url).get(getAllTours).post(createTour);
 app.route(specificUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
