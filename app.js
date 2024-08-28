@@ -24,7 +24,7 @@ const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
 const encoding = 'utf-8';
 const tours = JSON.parse(fs.readFileSync(filePath, encoding));
 
-// Route handlers
+// Tours route handlers
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
 
@@ -100,15 +100,60 @@ const deleteTour = (req, res) => {
   });
 };
 
+// Users route handlers
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not yet defined',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not yet defined',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not yet defined',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not yet defined',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'fail',
+    message: 'This route is not yet defined',
+  });
+};
+
 const rootUrl = '/api/v1';
+const parameter = 'id';
+
 const toursResource = '/tours';
 const toursUrl = `${rootUrl}${toursResource}`;
-const parameter = 'id';
 const specificTourUrl = `${toursUrl}/:${parameter}`;
+
+const usersResource = '/users';
+const usersUrl = `${rootUrl}${usersResource}`;
+const specificUserUrl = `${usersUrl}/:${parameter}`;
 
 // Tours Routes
 app.route(toursUrl).get(getAllTours).post(createTour);
 app.route(specificTourUrl).get(getTour).patch(updateTour).delete(deleteTour);
+
+// Users Routes
+app.route(usersUrl).get(getAllUsers).post(createUser);
+app.route(specificUserUrl).get(getUser).patch(updateUser).delete(deleteUser);
 
 // Start server
 app.listen(port, () => {
