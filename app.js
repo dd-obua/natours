@@ -11,6 +11,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 const port = 3000;
 
 const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
@@ -18,8 +23,11 @@ const encoding = 'utf-8';
 const tours = JSON.parse(fileSystem.readFileSync(filePath, encoding));
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime);
+
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     results: tours.length,
     data: { tours },
   });
