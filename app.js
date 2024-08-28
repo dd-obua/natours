@@ -7,7 +7,9 @@ const userRouter = require('./routes/userRoutes');
 const app = express();
 
 // Middleware
+
 app.use(morgan('dev'));
+
 app.use(express.json()); // body parser
 
 app.use((req, res, next) => {
@@ -23,13 +25,8 @@ app.use((req, res, next) => {
 const toursUrl = '/api/v1/tours';
 const usersUrl = '/api/v1/users';
 
-// Mounting a router on routes
+// Mount routers on routes
 app.use(toursUrl, tourRouter);
 app.use(usersUrl, userRouter);
 
-// Start server
-const port = 3000;
-
-app.listen(port, () => {
-  console.log(`App running on port ${port} ...`);
-});
+module.exports = app;
