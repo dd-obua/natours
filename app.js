@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 const toursUrl = '/api/v1/tours';
 const usersUrl = '/api/v1/users';
-
+ 
 // Mount routers on routes
 app.use(toursUrl, tourRouter);
 app.use(usersUrl, userRouter);
