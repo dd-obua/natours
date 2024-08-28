@@ -6,8 +6,6 @@ const tourController = require('../controllers/tourController');
 const { getAllTours, getTour, createTour, updateTour, deleteTour } =
   tourController;
 
-const app = express();
-
 // Tours Routes
 const router = express.Router();
 router.route(rootUrl).get(getAllTours).post(createTour);
