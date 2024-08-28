@@ -6,6 +6,11 @@ const app = express();
 // Middleware - a body parser
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('Hello from the middleware 👋');
+  next();
+});
+
 const port = 3000;
 
 const filePath = `${__dirname}/dev-data/data/tours-simple.json`;
