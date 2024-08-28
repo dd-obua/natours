@@ -136,24 +136,25 @@ const deleteUser = (req, res) => {
   });
 };
 
-const rootUrl = '/api/v1';
+const rootUrl = '/';
+const toursUrl = '/api/v1/tours';
+const usersUrl = '/api/v1/users';
 const parameter = 'id';
-
-const toursResource = '/tours';
-const toursUrl = `${rootUrl}${toursResource}`;
-const specificTourUrl = `${toursUrl}/:${parameter}`;
-
-const usersResource = '/users';
-const usersUrl = `${rootUrl}${usersResource}`;
-const specificUserUrl = `${usersUrl}/:${parameter}`;
+const specificUrl = `${rootUrl}:${parameter}`;
 
 // Tours Routes
-app.route(toursUrl).get(getAllTours).post(createTour);
-app.route(specificTourUrl).get(getTour).patch(updateTour).delete(deleteTour);
+const tourRouter = express.Router();
+app.use(toursUrl, tourRouter);
+
+tourRouter.route(rootUrl).get(getAllTours).post(createTour);
+tourRouter.route(specificUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
 // Users Routes
-app.route(usersUrl).get(getAllUsers).post(createUser);
-app.route(specificUserUrl).get(getUser).patch(updateUser).delete(deleteUser);
+const userRouter = express.Router();
+app.use(usersUrl, userRouter);
+
+userRouter.route(rootUrl).get(getAllUsers).post(createUser);
+userRouter.route(specificUrl).get(getUser).patch(updateUser).delete(deleteUser);
 
 // Start server
 app.listen(port, () => {
