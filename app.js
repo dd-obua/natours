@@ -60,7 +60,7 @@ const createTour = (req, res) => {
   tours.push(newTour);
   const data = JSON.stringify(tours);
 
-  fileSystem.writeFile(filePath, data, (error) => {
+  fs.writeFile(filePath, data, (error) => {
     res.status(201).json({
       status: 'success',
       data: { tour: newTour },
@@ -101,14 +101,14 @@ const deleteTour = (req, res) => {
 };
 
 const rootUrl = '/api/v1';
-const resource = '/tours';
-const url = `${rootUrl}${resource}`;
+const toursResource = '/tours';
+const toursUrl = `${rootUrl}${toursResource}`;
 const parameter = 'id';
-const specificUrl = `${url}/:${parameter}`;
+const specificTourUrl = `${toursUrl}/:${parameter}`;
 
-// Routes
-app.route(url).get(getAllTours).post(createTour);
-app.route(specificUrl).get(getTour).patch(updateTour).delete(deleteTour);
+// Tours Routes
+app.route(toursUrl).get(getAllTours).post(createTour);
+app.route(specificTourUrl).get(getTour).patch(updateTour).delete(deleteTour);
 
 // Start server
 app.listen(port, () => {
