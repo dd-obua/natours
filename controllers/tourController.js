@@ -4,7 +4,7 @@ const filePath = `${__dirname}/../dev-data/data/tours-simple.json`;
 const encoding = 'utf-8';
 const tours = JSON.parse(fs.readFileSync(filePath, encoding));
 
-// Tours route handlers
+// middleware definition
 
 // param middleware
 exports.checkId = (req, res, next, val) => {
@@ -18,6 +18,18 @@ exports.checkId = (req, res, next, val) => {
   }
   next();
 };
+
+exports.checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Missing name or price',
+    });
+  }
+  next();
+};
+
+// Tours route handlers
 
 exports.getAllTours = (req, res) => {
   res.status(200).json({
