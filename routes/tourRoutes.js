@@ -7,7 +7,7 @@ const { getAllTours, getTour, createTour, updateTour, deleteTour, checkId } =
 // Tours Routes
 const router = express.Router();
 
-// Param middleware
+// param middleware
 const parameter = 'id';
 router.param(parameter, checkId);
 
