@@ -7,7 +7,9 @@ const { getAllTours, getTour, createTour, updateTour, deleteTour, checkId } =
 // Tours Routes
 const router = express.Router();
 
-router.param(parameter, checkId); // Param middleware
+// Param middleware
+const parameter = 'id';
+router.param(parameter, checkId);
 
 router.route('/').get(getAllTours).post(createTour);
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
