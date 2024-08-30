@@ -5,13 +5,14 @@ const encoding = 'utf-8';
 const tours = JSON.parse(fs.readFileSync(filePath, encoding));
 
 // Tours route handlers
-const validateTourId = (req, res, tours) => {
+exports.checkId = (req, res, next, val) => {
   if (+req.params.id > tours.length) {
     return res.status(404).json({
       status: 'fail',
       message: 'Invalid id',
     });
   }
+  next();
 };
 
 exports.getAllTours = (req, res) => {
@@ -24,7 +25,6 @@ exports.getAllTours = (req, res) => {
 };
 
 exports.getTour = (req, res) => {
-  validateTourId(req, res, tours);
   const tour = tours.find((tour) => tour.id === +req.params.id);
   res.status(200).json({
     status: 'success',
@@ -47,7 +47,6 @@ exports.createTour = (req, res) => {
 };
 
 exports.updateTour = (req, res) => {
-  validateTourId(req, res, tours);
   res.status(200).json({
     status: 'success',
     data: { tour: '<Updated tour here>' },
@@ -55,7 +54,6 @@ exports.updateTour = (req, res) => {
 };
 
 exports.deleteTour = (req, res) => {
-  validateTourId(req, res, tours);
   res.status(204).json({
     status: 'success',
     data: null,
