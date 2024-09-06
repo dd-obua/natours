@@ -9,6 +9,11 @@ const connectionString = process.env.CONNECTION_STRING.replace(
   process.env.DB_NAME
 ).replace('<db_password>', encodeURIComponent(process.env.DB_PASSWORD));
 
+const localConnectionString = process.env.LOCAL_CONNECTION_STRING.replace(
+  '<db_name>',
+  process.env.DB_NAME
+);
+
 mongoose
   .connect(connectionString)
   .then((conn) => console.log('DB connection successful'));
