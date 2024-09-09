@@ -19,7 +19,7 @@ mongoose
   .then(() => console.log('DB connection successful'));
 
 // mongoose schema
-const tourSchema = new mongoose.Schema({
+const tourDefinition = {
   name: {
     type: String,
     required: [true, 'A tour must have a name'],
@@ -27,10 +27,25 @@ const tourSchema = new mongoose.Schema({
   },
   rating: { type: Number, default: 4.5 },
   price: { type: Number, required: [true, 'A tour must have a price'] },
-});
+};
+
+const tourSchema = new mongoose.Schema(tourDefinition);
 
 // Tour model
 const Tour = mongoose.model('Tour', tourSchema);
+
+// Tour data
+const tourData = {
+  name: 'The Park Camper',
+  price: 997,
+};
+
+const testTour = new Tour(tourData);
+
+testTour
+  .save()
+  .then((doc) => console.log(doc))
+  .catch((error) => console.log(error));
 
 // Start server
 const port = process.env.port || 3000;
