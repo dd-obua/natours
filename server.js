@@ -29,6 +29,9 @@ const tourSchema = new mongoose.Schema({
   price: { type: Number, required: [true, 'A tour must have a price'] },
 });
 
+// Tour model
+const Tour = mongoose.model('Tour', tourSchema);
+
 // Start server
 const port = process.env.port || 3000;
 app.listen(port, () => {
