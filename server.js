@@ -16,7 +16,7 @@ const localConnectionString = process.env.LOCAL_CONNECTION_STRING.replace(
 
 mongoose
   .connect(connectionString)
-  .then((conn) => console.log('DB connection successful'));
+  .then(() => console.log('DB connection successful'));
 
 // Start server
 const port = process.env.port || 3000;
