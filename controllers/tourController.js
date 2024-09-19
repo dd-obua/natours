@@ -1,3 +1,4 @@
+const fs = require('fs');
 const Tour = require('./../models/tourModel');
 
 // Tours route handlers
@@ -19,18 +20,20 @@ exports.getTour = (req, res) => {
   });
 };
 
-exports.createTour = (req, res) => {
-  const newId = tours[tours.length - 1].id + 1;
-  const newTour = Object.assign({ id: newId }, req.body);
-  tours.push(newTour);
-  const data = JSON.stringify(tours);
+exports.createTour = async (req, res) => {
+  try {
+    const newTour = await Tour.create(req.body);
 
-  fs.writeFile(filePath, data, (error) => {
     res.status(201).json({
       status: 'success',
       data: { tour: newTour },
     });
-  });
+  } catch (error) {
+    res.status(400).json({
+      status: 'fail',
+      message: 'Invalid data sent',
+    });
+  }
 };
 
 exports.updateTour = (req, res) => {
