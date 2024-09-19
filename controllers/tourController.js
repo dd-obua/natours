@@ -1,10 +1,6 @@
 const fs = require('fs');
 const Tour = require('./../models/tourModel');
 
-const filePath = `${__dirname}/../dev-data/data/tours-simple.json`;
-const encoding = 'utf-8';
-const tours = JSON.parse(fs.readFileSync(filePath, encoding));
-
 // middleware definition
 
 // param middleware
