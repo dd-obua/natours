@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Tour = require('./../models/tourModel');
 
 // middleware definition
