@@ -2,19 +2,6 @@ const Tour = require('./../models/tourModel');
 
 // middleware definition
 
-// param middleware
-exports.checkId = (req, res, next, val) => {
-  console.log(`Tour id is ${val}`);
-
-  if (+req.params.id > tours.length) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid id',
-    });
-  }
-  next();
-};
-
 exports.checkBody = (req, res, next) => {
   if (!req.body.name || !req.body.price) {
     return res.status(400).json({
